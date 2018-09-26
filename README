@@ -1,0 +1,42 @@
+Download data.zip (106MB) from https://mega.nz/#!gm4mxCya!b_SwGNz-EBmz-lo0GUKW7pDEHgODsQNFbmHdBRMnHOo and extract in root folder of repo.
+Download models.zip (43MB) from https://mega.nz/#!o3py3CKQ!oomwDuhnpiQkbwCawbwH7nGcBGBFSgfCtd_eA7e0_Ms and do the same.
+
+folders
+=======
+
+Data is in the following folders:
+
+data: contains raw data downloaded from google drive. format - .mat
+seived: merged scattering and transmittance data into one row and removed duplicate rows. format - .csv
+unsieved_concat: merged scattering and transmittance to be used by nnet2. format - .mat 
+shuffled: concatenated all files in seived folder into one file and shuffled to create Final_data/data.mat. format - .mat
+Final_data: data in shuffled/all.mat is seperated into train, val, and test to be fed in to nnet0 and nnet1. format - .mat
+(for more info see data-analysis-and-rearranging.ipynb)
+
+Models in models/ folder. 
+models/model0.h5: weights of nnet0
+models/model0.json: model of nnet0
+models/model1.h5: weights of nnet1
+models/model1.json: model of nnet1
+models/nnet[i]: contains 3 weights{}.hdf5 files and the model.json of nnet[i], [i]=1,2,3,4,5,6
+
+notebooks
+=========
+
+nnet0.ipynb: two 24-node hidden layers acc around 70% in 5 epochs
+nnet1.ipynb: four 24-node hidden layers acc around 70% in 5 epochs
+nnet2.ipynb: two 512-node hidden layers acc around 90% in 5 epochs with dropout
+nnet3.ipynb: two 512-node hidden layers acc around 90% in 5 epochs without dropout
+nnet4.ipynb: four 512-node hidden layers acc around 90% in 5 epochs without dropout
+nnet5.ipynb: no hidden layers acc around 57% in 5 epochs without dropout (Just to check)
+nnet6.ipynb: two 512-node hidden layers acc around 90% in 5 epochs with dropout
+
+nnet0 and nnet1 accept 16 inputs.
+nnet12,nnet3, nnet4 and nnet5 accept 32 x 16 input.
+nnet6 accepts 64 x 16 input.
+
+other
+=====
+
+my_classes.py: contains data generators to be used in nnet2,+
+nnet2_partition.pickle: partition dictionary used in nnet2,+
